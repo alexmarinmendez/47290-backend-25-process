@@ -1,0 +1,18 @@
+{
+  "name": "47290-backend-25-process",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-process-ex.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "express": "^4.18.2"
+  }
+}
