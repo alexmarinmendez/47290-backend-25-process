@@ -1,6 +1,7 @@
 import express from 'express'
 import usersRouter from './routers/user.router.js'
 import { Command } from 'commander'
+import { fork } from 'child_process'
 
 const program = new Command()
 
@@ -14,18 +15,14 @@ const port = program.opts().p
 const mode = program.opts().mode
 const app = express()
 
-const operacionCompleja = () => {
-    let result = 0
-    for (let index = 0; index < 5e9; index++) {
-        result += index
-    }
-    return result
-}
+
 
 app.get('/', (req, res) => res.send('ok'))
 app.get('/suma', (req, res) => {
-    const result = operacionCompleja()
-    res.json({result})
+    const child = fork('./src/operacionCompleja.js')
+    child.on('message', result => {
+        res.json({result})
+    })
 })
 app.use('/users', usersRouter)
 
